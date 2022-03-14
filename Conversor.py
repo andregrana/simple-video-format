@@ -93,7 +93,12 @@ def select_convert() :
     extensionsToCheck = ['.mkv', '.mp4', '.MP4', '.AVI', '.avi','.MOV']
     while True : 
         # List all files at input folder with video extentions.
-        videos = easygui.multchoicebox("Quais videos deseja converter? \n Barra de espaço para selecionar.", "Selecionar",choices=os.listdir(strInputFolder))
+        files_list = os.listdir(strInputFolder)
+        choices_videos = []
+        for file in files_list:
+            if any(ext in file for ext in extensionsToCheck):
+                choices_videos.append(file)
+        videos = easygui.multchoicebox("Quais videos deseja converter? \n Barra de espaço para selecionar.", "Selecionar",choices=choices_videos)
         str = ""
         for video in videos:
             if any(ext in video for ext in extensionsToCheck):
